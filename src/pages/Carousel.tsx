@@ -78,7 +78,7 @@ const Carousel = () => {
         {carouselData.map((item) => (
           <div key={item.id} className="relative w-full">
             <a href={item.link} rel="noopener noreferrer">
-              <div className="relative w-full h-32 sm:h-64 md:h-80 lg:h-96">
+              <div className="relative w-full h-32 sm:h-64 md:h-80 lg:h-96 ">
                 <Image
                   src={item.imageUrl}
                   alt={`Product ${item.id}`}
