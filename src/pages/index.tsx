@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import Cards from "./Cards";
 import Carousel from "./Carousel";
 import Footer from "./Footer";
+import Top from "./Top"
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
       </div>
       <div>
         <Carousel />
+      </div>
+      <div>
+        <Top />
       </div>
       <Footer />
     </div>

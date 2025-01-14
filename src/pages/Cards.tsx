@@ -15,7 +15,7 @@ const Cards = () => {
   ];
 
   return (
-    <div className="flex overflow-x-auto space-x-6 p-4 snap-x snap-mandatory lg:pt-8">
+    <div className="flex overflow-x-auto space-x-6 p-4 snap-x snap-mandatory lg:pt-8 md:pt-8 md:grid-rows-2 md:grid-cols-5">
       {cardData.map((card, index) => (
         <a
           href={card.link}

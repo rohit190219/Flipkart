@@ -73,12 +73,12 @@ const Carousel = () => {
   };
 
   return (
-    <div className="carousel-container max-w-[90%] mx-auto px-2 sm:px-4 lg:px-6 py-6">
+    <div className="carousel-container max-w-[90%] lg:mx-auto mt-32 lg:mt-0 md:mt-0 mx-4 px-2 sm:px-4 lg:px-6 py-6">
       <Slider {...settings}>
         {carouselData.map((item) => (
           <div key={item.id} className="relative w-full">
             <a href={item.link} rel="noopener noreferrer">
-              <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96">
+              <div className="relative w-full h-32 sm:h-64 md:h-80 lg:h-96">
                 <Image
                   src={item.imageUrl}
                   alt={`Product ${item.id}`}
