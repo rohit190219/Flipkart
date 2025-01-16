@@ -1,73 +1,42 @@
-import React, { useState, ChangeEvent } from "react";
+// pages/signup.js
+import { useState } from "react";
 
-const Signup = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+export default function Signup() {
+    const [name, setName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Add your signup logic here
-    if (username === "" || email === "" || password === "") {
-      setError("Please fill in all fields");
-    } else {
-      // Call API to create account
-      console.log("Account created");
-      setSuccess("Account created successfully");
-    }
-  };
+    const handleSignup = async () => {
+        const response = await fetch("/api/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, phoneNumber }),
+        });
+        const data = await response.json();
+        if (data.success) {
+            setMessage("Signup successful!");
+        } else {
+            setMessage(data.message);
+        }
+    };
 
-  const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-  };
-
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  return (
-    <div className="signup-container">
-      <h2>Signup</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-            placeholder="Enter username"
-          />
+    return (
+        <div style={{ padding: "2rem", maxWidth: "400px", margin: "auto" }}>
+            <h1>Signup</h1>
+            <input
+                type="text"
+                placeholder="Enter name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+            <input
+                type="tel"
+                placeholder="Enter phone number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+            <button onClick={handleSignup}>Signup</button>
+            <p>{message}</p>
         </div>
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            placeholder="Enter email"
-          />
-        </div>
-        <div className="form-group">
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Enter password"
-          />
-        </div>
-        <button type="submit">Signup</button>
-      </form>
-    </div>
-  );
-};
-
-export default Signup;
+    );
+}
